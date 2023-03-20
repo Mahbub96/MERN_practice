@@ -1,22 +1,34 @@
-import * as cacheStore from 'expo-secure-store';
-import { Button, Input, Text, VStack } from "native-base";
+import * as cacheStore from "expo-secure-store";
+import { Button, Input, Spinner, Text, VStack } from "native-base";
 import { useState } from "react";
 
 import client from "../API/client";
+import { useDataContext } from "../context/DataContext";
 const Login = () => {
+  const { loading, setAuth } = useDataContext();
   const [user, setUser] = useState({ ID: "", Pass: "" });
   const handleSubmit = () => {
     client
       .post("auth/login", user)
-      .then((res) => {
-        const token = res.data.accessToken;
-
-        cacheStore.setItemAsync("accessToken", token);
+      .then(async (res) => {
+        const { accessToken, ID } = res.data;
+        await cacheStore.setItemAsync("accessToken", accessToken);
+        setAuth(ID);
       })
       .catch((Err) => {
         console.log(Err);
       });
   };
+
+  if (loading) {
+    return (
+      <VStack flex={1} justifyContent={"center"} alignItems={"center"}>
+        <Text>
+          <Spinner />
+        </Text>
+      </VStack>
+    );
+  }
 
   return (
     <VStack p={12} flex={1} justifyContent={"space-around"}>

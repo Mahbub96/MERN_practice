@@ -1,3 +1,4 @@
+const createError = require("http-errors");
 const jwt = require("jsonwebtoken");
 
 const generateToken = (id, expireTime) => {
@@ -17,5 +18,14 @@ const generateToken = (id, expireTime) => {
 };
 
 const signAccessToken = async (id) => await generateToken(id, "1d");
-
-module.exports = { signAccessToken };
+const verifyAccessToken = async (req, res, next) => {
+  const token = req.headers.authorization;
+  console.log(token);
+  if (!token) return next(createError.Unauthorized());
+  jwt.verify(token, process.env.jwtAccessToken, (error, payload) => {
+    if (error) return next(createError.Unauthorized());
+    req.payload = payload;
+  });
+  next();
+};
+module.exports = { signAccessToken, verifyAccessToken };

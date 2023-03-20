@@ -1,16 +1,22 @@
-import { Button, HStack, VStack } from "native-base";
-import React from "react";
-import * as cacheStore from 'expo-secure-store';
-
+import { Text, Button, HStack, View, VStack } from "native-base";
+import React, { useEffect } from "react";
+import * as cacheStore from "expo-secure-store";
+import { useDataContext } from "../context/DataContext";
 
 const Home = ({ navigation }) => {
+  const { setAuth } = useDataContext();
+
+  const handleLogout = async () => {
+    await cacheStore.deleteItemAsync("accessToken");
+    setAuth(false);
+  };
   return (
-    <VStack>
-      <HStack>
-        <Button onPress={() => navigation.navigate("Login")}>
-          Go To Login
-          
-        </Button>
+    <VStack flex={1} justifyContent={"center"}>
+      <HStack justifyContent={"center"}>
+        {/* <Button onPress={() => navigation.navigate("Login")}> */}
+        <Text>This is home page </Text>
+        <Button onPress={handleLogout}>Logout</Button>
+        {/* </Button> */}
       </HStack>
     </VStack>
   );

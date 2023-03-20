@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const createError = require("http-error");
 const cors = require("cors");
-const authRouter = require("./routes/auth.route");
+	const authRouter = require("./routes/auth.route");
 
 require("dotenv").config();
 
@@ -14,6 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/auth", authRouter);
+app.use((error, req, res, next) => {
+  res.send({ error: { message: error.message, status: error.status } });
+});
 
 app.listen(5001, () => {
   console.log("run in port 5000");
