@@ -1,0 +1,18 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend server for card calculator",
+  "main": "index.js",
+  "scripts": {
+	  "start":"nodemon index",
+    "test": "nodemon index"
+  },
+  "author": "Mahbub Alam",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "http-error": "^0.0.6",
+    "morgan": "^1.10.0"
+  }
+}
