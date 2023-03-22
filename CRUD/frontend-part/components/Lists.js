@@ -1,22 +1,45 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
+import useDataContext from "../hooks/useDataContext";
 import List from "./List";
 
 export default function Lists() {
+  const [refreshing, setRefreshing] = React.useState(false);
+  const { datas, setDatas } = useDataContext();
+
+  //---------------------------- Refresh Handle ----------------------
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+      setDatas(datas);
+    }, 2000);
+  }, []);
+
   const navigation = useNavigation();
 
+  // --------------- Delete Handle -----------------------
+  const handleDelete = (id) => {
+    const newData = datas.filter((item, i) => id !== i);
+    setDatas([...newData]);
+  };
+
   return (
-    <ScrollView>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <View style={styles.container}>
-        {data.map((item, i) => (
+        {datas.map((item, i) => (
           <List
             key={i}
             data={item}
             onPress={() => {
-              console.log(i);
-              navigation.navigate("Details", { id: i });
+              navigation.navigate("Details", { id: i, data: item });
             }}
+            onDeletePress={() => handleDelete(i)}
           />
         ))}
       </View>
@@ -30,40 +53,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-const data = [
-  {
-    title: "title 1",
-    desc: "this is desc 1",
-    st: "active",
-  },
-  {
-    title: "title 2",
-    desc: "this is desc 2",
-    st: "active",
-  },
-
-  {
-    title: "title 3",
-    desc: "this is desc 3",
-    st: "active",
-  },
-
-  {
-    title: "title 4",
-    desc: "this is desc 4",
-    st: "active",
-  },
-
-  {
-    title: "title 5",
-    desc: "this is desc 5",
-    st: "active",
-  },
-
-  {
-    title: "title 6",
-    desc: "this is desc 6",
-    st: "active",
-  },
-];

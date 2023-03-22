@@ -1,10 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 
 export default function TodoDetails({ route }) {
-  const { id } = route.params;
+  const { id, data } = route.params;
+  const { title, st, desc } = data;
+
   return (
     <View style={styles.container}>
-      <Text>{id}</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text>{desc}</Text>
+      <Text>{st}</Text>
     </View>
   );
 }
@@ -13,8 +17,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    paddingTop: 60,
-    justifyContent: "center",
-    alignItems: "center",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
