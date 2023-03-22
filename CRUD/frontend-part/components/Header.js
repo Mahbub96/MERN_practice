@@ -5,18 +5,9 @@ import { StyleSheet, Text, View } from "react-native";
 const Header = () => {
   return (
     <View style={styles.headers}>
-      <View style={styles.icons}>
-        <AntDesign name="layout" size={29} color="black" />
-        <Text>ToDosr</Text>
-      </View>
-      <View>
-        <AntDesign
-          sytle={styles.icons}
-          name="calendar"
-          size={24}
-          color="black"
-        />
-      </View>
+      <AntDesign name="layout" size={29} color="#bbb" />
+      <Text style={styles.headerText}>ToDos</Text>
+      <AntDesign name="calendar" size={24} color="#bbb" />
     </View>
   );
 };
@@ -24,10 +15,14 @@ const Header = () => {
 const styles = StyleSheet.create({
   headers: {
     flexDirection: "row",
-    backgroundColor: "black",
+    backgroundColor: "#515151",
     justifyContent: "space-between",
+    alignItems: "center",
     color: "#fff",
   },
-  icons: { flex: 1, justifyContent: "space-between" },
+  headerText: {
+    color: "#fff",
+    fontSize: 30,
+  },
 });
 export default Header;
