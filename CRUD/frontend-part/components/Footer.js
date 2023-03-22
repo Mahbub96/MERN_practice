@@ -1,12 +1,16 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 const Footer = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>This is a footer</Text>
     </View>
   );
 };
 
 export default Footer;
+
+const styles = StyleSheet.create({
+  container: {},
+});
