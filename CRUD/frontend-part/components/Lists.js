@@ -24,6 +24,10 @@ export default function Lists() {
     const newData = datas.filter((item, i) => id !== i);
     setDatas([...newData]);
   };
+  // --------------- Edit Handle -----------------------
+  const handleEdit = (id) => {
+    navigation.navigate("EditTodo", { id });
+  };
 
   return (
     <ScrollView
@@ -40,6 +44,7 @@ export default function Lists() {
               navigation.navigate("Details", { id: i, data: item });
             }}
             onDeletePress={() => handleDelete(i)}
+            onEditPress={() => handleEdit(i)}
           />
         ))}
       </View>

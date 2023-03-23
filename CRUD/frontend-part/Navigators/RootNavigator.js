@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import DataContextProvider from "../contexts/DataContext";
 import AddTodo from "../Screens/AddTodo";
+import EditTodo from "../Screens/EditTodo";
 import HomeScreen from "./../Screens/HomeScreen";
 import TodoDetails from "./../Screens/TodoDetails";
 
@@ -27,6 +28,7 @@ const Screens = () => {
       />
       <Stack.Screen name="Details" component={TodoDetails} />
       <Stack.Screen name="AddTodo" component={AddTodo} />
+      <Stack.Screen name="EditTodo" component={EditTodo} />
     </Stack.Navigator>
   );
 };

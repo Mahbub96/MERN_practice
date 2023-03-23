@@ -1,9 +1,8 @@
-import {Entypo, FontAwesome, FontAwesome5} from "@expo/vector-icons";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import { Entypo, FontAwesome, FontAwesome5 } from "@expo/vector-icons";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-
-uexport default function List(props) {
-  const { data, style, onDeletePress, ...rest } = props;
+export default function List(props) {
+  const { data, style, onDeletePress, onEditPress, ...rest } = props;
 
   const { title, desc, st } = data;
 
@@ -13,21 +12,19 @@ uexport default function List(props) {
         <FontAwesome name="connectdevelop" size={24} color="black" />
       </View>
       <View style={{ flex: 6 }}>
-        <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-          This is a text{title}
-        </Text>
+        <Text style={{ fontSize: 16, fontWeight: "bold" }}>{title}</Text>
         <Text style={{ color: "gray" }}>{desc}</Text>
       </View>
 
       <TouchableOpacity
-        onPress={handleEdit}
+        onPress={onEditPress}
         style={{
           paddingVertical: 8,
           flex: 1,
           alignItems: "center",
         }}
       >
-	  <Entypo name="edit" size={24} color="black" />
+        <Entypo name="edit" size={24} color="black" />
       </TouchableOpacity>
 
       <TouchableOpacity

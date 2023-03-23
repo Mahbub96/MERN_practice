@@ -9,7 +9,7 @@ const AddTodo = ({ navigation }) => {
   const [desc, setDesc] = useState("");
 
   const handleSubmit = () => {
-    setDatas((prev) => [...prev, { title, desc }]);
+    setDatas((prev) => [{ title, desc }, ...prev]);
     navigation.goBack();
   };
 

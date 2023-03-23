@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import { Button, StyleSheet, TextInput, View } from "react-native";
 import useDataContext from "../hooks/useDataContext";
 
-const AddTodo = ({ navigation }) => {
-  const { setDatas } = useDataContext();
+const EditTodo = ({ navigation, route }) => {
+  const { id } = route.params;
 
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const { setDatas, datas } = useDataContext();
+
+  const [title, setTitle] = useState(datas[id].title);
+  const [desc, setDesc] = useState(datas[id].desc);
 
   const handleSubmit = () => {
-    setDatas((prev) => [...prev, { title, desc }]);
+    const newArray = [...datas];
+    newArray[id] = { title, desc };
+    setDatas([...newArray]);
     navigation.goBack();
   };
 
@@ -17,11 +21,13 @@ const AddTodo = ({ navigation }) => {
     <View style={styles.container}>
       <TextInput
         placeholder="Title"
+        value={title}
         style={styles.input}
         onChangeText={(text) => setTitle(text)}
       />
       <TextInput
         placeholder="Description"
+        value={desc}
         style={styles.input}
         onChangeText={(text) => setDesc(text)}
       />
@@ -45,4 +51,4 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
-export default AddTodo;
+export default EditTodo;
