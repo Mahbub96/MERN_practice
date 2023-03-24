@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Button, StyleSheet, TextInput, View } from "react-native";
+// import DatePicker from "react-native-datepicker";
 import useDataContext from "../hooks/useDataContext";
-
+import DatePicker from "./../components/DatePicker";
 const AddTodo = ({ navigation }) => {
   const { setDatas } = useDataContext();
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [date, setDate] = useState(new Date());
 
   const handleSubmit = () => {
     setDatas((prev) => [{ title, desc }, ...prev]);
@@ -25,7 +27,7 @@ const AddTodo = ({ navigation }) => {
         style={styles.input}
         onChangeText={(text) => setDesc(text)}
       />
-
+      <DatePicker date={date} setDate={setDate} />
       <Button title="Submit" onPress={handleSubmit} />
     </View>
   );

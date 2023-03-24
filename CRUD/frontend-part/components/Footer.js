@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 const Footer = () => {
   return (
     <View style={styles.container}>
-      <Text>This is a footer</Text>
+      <Text style={styles.text}>This is a footer. &copy; Mahbub Alam</Text>
     </View>
   );
 };
@@ -12,5 +12,13 @@ const Footer = () => {
 export default Footer;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    maxHeight: 40,
+  },
+  text: { color: "white", fontSize: 16 },
 });
